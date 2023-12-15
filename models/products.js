@@ -1,7 +1,7 @@
 const { DataTypes, Sequelize } = require('sequelize')
 const db = require('../db.js')
 
-const Users = db.define('products',
+const Products = db.define('products',
     // Описание таблиц
     {
         id: {
@@ -29,4 +29,4 @@ const Users = db.define('products',
     }
 )
 
-module.exports = Users
+module.exports = Products

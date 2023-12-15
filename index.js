@@ -7,10 +7,12 @@ const Products = require('./models/products.js');
 // // создаем объект приложения
 const app = express();
 
+
+app.use(express.static("public"));
+
 // подключение к базе данных
 db.authenticate()
     .catch(error => console.error(error))
-
 
 // определяем обработчик для маршрута "/"
 app.get("/", async (req, res) => {
@@ -21,7 +23,7 @@ app.get("/", async (req, res) => {
         //     category: "Спортивная обувь",
         //     price: 3000
         // })
-        res.sendFile(path.join(__dirname, 'views/index.html'));
+        res.sendFile(path.join(__dirname, 'public/index.html'));
 
     } catch (error) {
         res.status(400).json({
@@ -42,6 +44,10 @@ app.get("/searchProduct", async (req, res) => {
         })
     }
 })
+
+// app.post("/addCategory") {
+
+// }
 
 // app.post("/addCategory") {
 
