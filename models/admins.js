@@ -1,12 +1,12 @@
 const { DataTypes, Sequelize } = require('sequelize')
 const db = require('../db.js')
 
-const Products = db.define('Products',
+const Admins = db.define('Admins',
     // Описание таблиц
     {
         id: {
             type: DataTypes.INTEGER,
-            autoIncrement: true,
+			autoIncrement: true,
             primaryKey: true,
             allowNull: false
         },
@@ -14,14 +14,15 @@ const Products = db.define('Products',
             type: DataTypes.STRING(30),
             allowNull: true
         },
-        categoryId: {
-            type: DataTypes.INTEGER,
+        nickname: {
+            type: DataTypes.STRING(30),
             allowNull: true
         },
-        price: {
-            type: DataTypes.FLOAT,
+        password: {
+            type: DataTypes.STRING(30),
             allowNull: true
-        }
+        },
+        
     },
     // Опции
     {
@@ -29,4 +30,4 @@ const Products = db.define('Products',
     }
 )
 
-module.exports = Products
+module.exports = Admins

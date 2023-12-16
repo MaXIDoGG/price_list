@@ -4,9 +4,12 @@ const path = require('path')
 const { v4: uuidv4 } = require('uuid');
 const db = require('./db.js')
 const Products = require('./models/products.js');
+const Categories = require('./models/categories.js');
+const Admins = require('./models/admins.js');
 // // создаем объект приложения
 const app = express();
 
+const urlencodedParser = express.urlencoded({extended: false});
 
 app.use(express.static("public"));
 
@@ -17,12 +20,6 @@ db.authenticate()
 // определяем обработчик для маршрута "/"
 app.get("/", async (req, res) => {
     try {
-        // await Products.create({
-        //     id: uuidv4(),
-        //     name: "Кроссовки Nike",
-        //     category: "Спортивная обувь",
-        //     price: 3000
-        // })
         res.sendFile(path.join(__dirname, 'public/index.html'));
 
     } catch (error) {
@@ -45,9 +42,19 @@ app.get("/searchProduct", async (req, res) => {
     }
 })
 
-// app.post("/addCategory") {
-
-// }
+app.post("/addCategory", urlencodedParser, async (req, res) => {
+    try {
+        console.log(req.body)
+        await Categories.create({
+            name: req.body.category
+        })
+        res.status(200)
+    } catch (error) {
+        res.status(400).json({
+            error: error.message
+        })
+    }
+})
 
 // app.post("/addCategory") {
 

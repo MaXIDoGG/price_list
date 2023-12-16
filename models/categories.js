@@ -1,25 +1,17 @@
 const { DataTypes, Sequelize } = require('sequelize')
 const db = require('../db.js')
 
-const Products = db.define('Products',
+const Categories = db.define('categories',
     // Описание таблиц
     {
         id: {
             type: DataTypes.INTEGER,
-            autoIncrement: true,
+			autoIncrement: true,
             primaryKey: true,
-            allowNull: false
+            allowNull: false,
         },
         name: {
             type: DataTypes.STRING(30),
-            allowNull: true
-        },
-        categoryId: {
-            type: DataTypes.INTEGER,
-            allowNull: true
-        },
-        price: {
-            type: DataTypes.FLOAT,
             allowNull: true
         }
     },
@@ -29,4 +21,4 @@ const Products = db.define('Products',
     }
 )
 
-module.exports = Products
+module.exports = Categories
