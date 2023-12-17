@@ -10,54 +10,83 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="row">
-            <form action="/addCategory" method="post">
-                <div class="mb-3">
-                    <label for="category" class="form-label">Введите название новой категории:</label>
-                    <input type="text" name="category" class="form-control" id="category">
-                </div>
-                <button type="submit" class="btn btn-primary">Добавить категорию</button>
-            </form>
-        </div>
-        <div class="row">
-            <form action="/addProduct" method="post">
-                <div class="mb-3">
-                    <label for="productName" class="form-label">Введите название нового товара:</label>
-                    <input type="text" name="productName" class="form-control" id="productName">
-                </div>
-                <div class="mb-3">
-                    <label for="productPrice" class="form-label">Введите цену:</label>
-                    <input type="number" name="productPrice" class="form-control" id="productPrice">
-                </div>
-                <select name="ProductCategory" class="form-select form-select-lg mb-3">
-                    <option selected>Выберите категорию</option>
-                    <option value="">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select>
-                <button type="submit" class="btn btn-primary">Добавить товар</button>
-            </form>
-        </div>
-        <div class="row">
-            <form action="/addProduct" method="post">
-                <div class="mb-3">
-                    <label for="productName" class="form-label">Введите название нового товара:</label>
-                    <input type="text" name="productName" class="form-control" id="productName">
-                </div>
-                <div class="mb-3">
-                    <label for="productPrice" class="form-label">Введите цену:</label>
-                    <input type="number" name="productPrice" class="form-control" id="productPrice">
-                </div>
-                <select name="ProductCategory" class="form-select form-select-lg mb-3" id="ProductCategory">
-                    <option selected>Выберите категорию</option>
-                  </select>
-                <button type="submit" class="btn btn-primary">Добавить товар</button>
-            </form>
-        </div>
     
-        
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                Прайс-лист фирмы
+            </a>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <h1>Добавить новую категорию</h1>
+        <form action="/addCategory" method="post">
+            <div class="mb-3">
+                <label for="category" class="form-label">Введите название новой категории:</label>
+                <input type="text" name="category" class="form-control" id="category">
+            </div>
+            <button type="submit" class="btn btn-primary">Добавить категорию</button>
+        </form>
+        <br><hr><br>
     </div>
+    <div class="container">
+        <h1>Добавить новый товар</h1>
+        <form action="/addProduct" method="post">
+            <div class="mb-3">
+                <label for="productName" class="form-label">Введите название нового товара:</label>
+                <input type="text" name="productName" class="form-control" id="productName">
+            </div>
+            <div class="mb-3">
+                <label for="productPrice" class="form-label">Введите цену:</label>
+                <input type="number" name="productPrice" class="form-control" id="productPrice">
+            </div>
+            <select name="ProductCategory" class="form-select form-select-lg mb-3" id="ProductCategory">
+                <option selected>Выберите категорию</option>
+            </select>
+            <button type="submit" class="btn btn-primary">Добавить товар</button>
+        </form>
+        <br><hr><br>
+    </div>
+    <div class="container">
+        <h1>Поиск товара по различным полям</h1>
+        <form action="#" onsubmit="searchProduct();return false">
+            <div class="mb-3">
+                <label for="productName" class="form-label">Введите название товара:</label>
+                <input type="text" name="productName" class="form-control" id="productName1">
+            </div>
+            <!-- <div class="mb-3">
+                <label for="productPrice" class="form-label">Введите цену:</label>
+                <input type="number" name="productPrice" class="form-control" id="productPrice1">
+            </div> -->
+            <select name="ProductCategory" class="form-select form-select-lg mb-3" id="ProductCategory1">
+                <option selected>Выберите категорию</option>
+            </select>
+            <button type="submit" class="btn btn-primary">Найти товар</button>
+        </form>
+        <br>
+        <table id="productsTable">
+            <tr>
+                <th>Название товара</th>
+                <th>Категория товара</th>
+                <th>Цена товара</th>
+            </tr> 
+            <!-- <tr>
+                <td></td>
+                <td>данные</td>
+            </tr> ряд с ячейками тела таблицы -->
+        </table>
+        <br><hr><br>
+    </div>
+            
+        <!-- <div class="row">
+            <div class="col">
+
+                
+            </div>
+        </div> -->
+        
+    
     
 
 

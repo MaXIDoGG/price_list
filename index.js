@@ -30,10 +30,10 @@ app.get("/", async (req, res) => {
 
 });
 
-app.get("/searchProduct", async (req, res) => {
+app.post("/searchProduct", async (req, res) => {
     try {
-        console.log(req.params)
-        let products = await Products.findAll();
+        console.log(req.body)
+        let products = await Products;
         res.send(products)
     } catch (error) {
         res.status(400).json({
@@ -48,7 +48,8 @@ app.post("/addCategory", urlencodedParser, async (req, res) => {
         await Categories.create({
             name: req.body.category
         })
-        res.status(200)
+        res.sendFile(path.join(__dirname, 'public/index.html'))
+        
     } catch (error) {
         res.status(400).json({
             error: error.message
@@ -59,13 +60,15 @@ app.post("/addCategory", urlencodedParser, async (req, res) => {
 app.post("/addProduct", urlencodedParser, async (req, res) => {
     try {
         console.log(req.body)
+        
+        // let stringPrice = "" + req.body.productPrice;
+        // console.log(parseInt(stringPrice))
         await Products.create({
             name: req.body.productName,
             categoryid: req.body.ProductCategory,
-            price: req.body.ProductPrice
+            price: req.body.productPrice
         })
-        res.status(200)
-        res.send("Продукт добавлен!")
+        res.sendFile(path.join(__dirname, 'public/index.html'))
     } catch (error) {
         res.status(400).json({
             error: error.message
@@ -77,9 +80,9 @@ app.get("/loadCategories", urlencodedParser, async (req, res) => {
     try {
         let categories = await Categories.findAll();
 
-        res.status(200)
         res.json(categories)
-        console.log(categories)
+        res.status(200)
+        // console.log(categories)
     } catch (error) {
         res.status(400).json({
             error: error.message

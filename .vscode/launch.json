@@ -1,0 +1,24 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "externalConsole": true,
+      "cwd": "c:/Users/maksn/AppData/Local/Temp/1b995d0b-c006-4afb-b5d7-d4d263b8571d_OSI3.zip.71d/OSI3",
+      "program": "c:/Users/maksn/AppData/Local/Temp/1b995d0b-c006-4afb-b5d7-d4d263b8571d_OSI3.zip.71d/OSI3/build/Debug/outDebug",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
+}
