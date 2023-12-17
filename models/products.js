@@ -1,7 +1,7 @@
 const { DataTypes, Sequelize } = require('sequelize')
 const db = require('../db.js')
 
-const Products = db.define('Products',
+const Products = db.define('products',
     // Описание таблиц
     {
         id: {
@@ -14,7 +14,7 @@ const Products = db.define('Products',
             type: DataTypes.STRING(30),
             allowNull: true
         },
-        categoryId: {
+        categoryid: {
             type: DataTypes.INTEGER,
             allowNull: true
         },

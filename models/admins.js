@@ -1,7 +1,7 @@
 const { DataTypes, Sequelize } = require('sequelize')
 const db = require('../db.js')
 
-const Admins = db.define('Admins',
+const Admins = db.define('admins',
     // Описание таблиц
     {
         id: {

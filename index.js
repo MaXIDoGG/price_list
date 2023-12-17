@@ -9,7 +9,7 @@ const Admins = require('./models/admins.js');
 // // создаем объект приложения
 const app = express();
 
-const urlencodedParser = express.urlencoded({extended: false});
+const urlencodedParser = express.urlencoded({ extended: false });
 
 app.use(express.static("public"));
 
@@ -55,6 +55,38 @@ app.post("/addCategory", urlencodedParser, async (req, res) => {
         })
     }
 })
+
+app.post("/addProduct", urlencodedParser, async (req, res) => {
+    try {
+        console.log(req.body)
+        await Products.create({
+            name: req.body.productName,
+            categoryid: req.body.ProductCategory,
+            price: req.body.ProductPrice
+        })
+        res.status(200)
+        res.send("Продукт добавлен!")
+    } catch (error) {
+        res.status(400).json({
+            error: error.message
+        })
+    }
+})
+
+app.get("/loadCategories", urlencodedParser, async (req, res) => {
+    try {
+        let categories = await Categories.findAll();
+
+        res.status(200)
+        res.json(categories)
+        console.log(categories)
+    } catch (error) {
+        res.status(400).json({
+            error: error.message
+        })
+    }
+})
+
 
 // app.post("/addCategory") {
 
