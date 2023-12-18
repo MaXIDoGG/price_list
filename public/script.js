@@ -1,13 +1,12 @@
 const select = document.querySelector('#ProductCategory');
 const select1 = document.querySelector('#ProductCategory1');
-console.log(select);
-// const select0 = document.createElement('option');
+const select2 = document.querySelector('#ProductCategory2');
+
 
 async function loadCategories() {
     let response = await fetch("/loadCategories");
 
-    if (response.ok) { // если HTTP-статус в диапазоне 200-299
-        // получаем тело ответа
+    if (response.ok) {
         let json = await response.json();
         
         for(let i = 0; i < json.length; i++) {
@@ -16,30 +15,28 @@ async function loadCategories() {
             select0.innerText = obj["name"];
             select0.setAttribute("value", obj["id"]);
             let select01 = select0.cloneNode(true);
+            let select02 = select0.cloneNode(true);
             select1.appendChild(select0);
             select.appendChild(select01);
+            select2.appendChild(select02);
         }
-
-        // console.log(json);
     } else {
         alert("Ошибка HTTP: " + response.status);
     }
 }
 
 async function searchProduct() {
-    let productName = document.querySelector("#productName1").getAttribute("name");
-    let productCategory = document.querySelector("#ProductCategory1").getAttribute("name");
+    let searchForm = document.querySelector("#searchForm"); 
     let productsTable = document.querySelector("#productsTable")
+
+    const data = new URLSearchParams();
+    for (const pair of new FormData(searchForm)) {
+        data.append(pair[0], pair[1]);
+    }
 
     let response = await fetch('/searchProduct', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json;charset=utf-8'
-        },
-        body: JSON.stringify({
-            name: productName,
-            categoryid: productCategory
-        })
+        body: data,
     });
 
 
@@ -54,15 +51,15 @@ async function searchProduct() {
         <th>${obj["price"]}</th>
         </tr>`;
     }
-    productsTable.innerHTML = `<tr>
-            <th>Название товара</th>
-            <th>Категория товара</th>
-            <th>Цена товара</th>
-        </tr>` + str;
-    
-    
+    productsTable.innerHTML = `<thead>
+            <tr>
+                <th>Название товара</th>
+                <th>Категория товара</th>
+                <th>Цена товара</th>
+            </tr> 
+            </thead><tbody>
+` + str + "</tbody>";    
 }
-
 
 loadCategories();
 

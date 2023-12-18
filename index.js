@@ -6,6 +6,8 @@ const db = require('./db.js')
 const Products = require('./models/products.js');
 const Categories = require('./models/categories.js');
 const Admins = require('./models/admins.js');
+const sequelize = require("sequelize");
+const { Op } = require("sequelize");
 // // создаем объект приложения
 const app = express();
 
@@ -30,15 +32,28 @@ app.get("/", async (req, res) => {
 
 });
 
-app.post("/searchProduct", async (req, res) => {
+app.post("/searchProduct", urlencodedParser, async (req, res) => {
     try {
         console.log(req.body)
-        let products = await Products;
+        let products;
+        const whereConditions = {};
+        if (req.body.productName) {
+            whereConditions.name = req.body.productName;
+        }
+        if (req.body.ProductCategory) {
+            whereConditions.categoryid = req.body.ProductCategory;
+        }
+        products = await Products.findAll({
+            where: {
+                [Op.and]: whereConditions
+            }
+        });
         res.send(products)
     } catch (error) {
         res.status(400).json({
             error: error.message
         })
+        console.log(error.message)
     }
 })
 
@@ -48,7 +63,7 @@ app.post("/addCategory", urlencodedParser, async (req, res) => {
         await Categories.create({
             name: req.body.category
         })
-        res.sendFile(path.join(__dirname, 'public/index.html'))
+        res.redirect("/")
         
     } catch (error) {
         res.status(400).json({
@@ -68,7 +83,7 @@ app.post("/addProduct", urlencodedParser, async (req, res) => {
             categoryid: req.body.ProductCategory,
             price: req.body.productPrice
         })
-        res.sendFile(path.join(__dirname, 'public/index.html'))
+        res.redirect("/")
     } catch (error) {
         res.status(400).json({
             error: error.message
