@@ -32,30 +32,82 @@ app.get("/", async (req, res) => {
 
 });
 
+// app.post("/searchProduct", urlencodedParser, async (req, res) => {
+//     try {
+//         let products;
+//         const whereConditions = {};
+//         if (req.body.productName) {
+//             whereConditions.name = req.body.productName;
+//         }
+//         const category = await Categories.findOne({
+//                 where: {
+//                     name: req.body.ProductCategory
+//                 }
+//             });
+
+//             // Добавим условие по categoryid вместо id
+//             whereConditions.categoryid = category ? category.id : null;
+//         products = await Products.findAll({
+//             where: whereConditions,
+//             include: [{
+//                 model: Categories,
+//                 as: 'category', // псевдоним для обращения к таблице categories
+//                 attributes: ['name'] // выбираем только имя категории
+//             }]
+//         });
+//         res.send(products)
+//     } catch (error) {
+//         res.status(400).json({
+//             error: error.message
+//         })
+//         console.log(error.message)
+//     }
+// })
+
 app.post("/searchProduct", urlencodedParser, async (req, res) => {
     try {
-        console.log(req.body)
         let products;
         const whereConditions = {};
+
         if (req.body.productName) {
             whereConditions.name = req.body.productName;
         }
+
         if (req.body.ProductCategory) {
-            whereConditions.categoryid = req.body.ProductCategory;
+            // Используем JOIN для соединения таблиц
+            products = await Products.findAll({
+                where: whereConditions,
+                include: [{
+                    model: Categories,
+                    as: 'category', // псевдоним для обращения к таблице categories
+                    attributes: ['name'], // выбираем только имя категории
+                    where: {
+                        id: req.body.ProductCategory
+                    }
+                }]
+            });
+        } else {
+            // Если категория не указана, просто выбираем товары без соединения
+            products = await Products.findAll({
+                where: whereConditions,
+                include: [{
+                    model: Categories,
+                    as: 'category', // псевдоним для обращения к таблице categories
+                    attributes: ['name'], // выбираем только имя категории
+                }]
+            });
         }
-        products = await Products.findAll({
-            where: {
-                [Op.and]: whereConditions
-            }
-        });
-        res.send(products)
+
+        res.send(products);
     } catch (error) {
         res.status(400).json({
             error: error.message
-        })
-        console.log(error.message)
+        });
+        console.log(error.message);
     }
-})
+});
+
+
 
 app.post("/addCategory", urlencodedParser, async (req, res) => {
     try {
@@ -105,9 +157,17 @@ app.get("/loadCategories", urlencodedParser, async (req, res) => {
     }
 })
 
+app.post("/changeCategory", urlencodedParser, async (req, res) => {
+    try {
+        const product = await Products.findByPk(req.body.productId);
+        await product.update({ categoryid: req.body.ProductCategory });
+        res.redirect("/")
+    } catch (error) {
+        res.status(400).json({
+            error: error.message
+        })
+    }
+})
 
-// app.post("/addCategory") {
-
-// }
 // начинаем прослушивать подключения на 3000 порту
 app.listen(3000);

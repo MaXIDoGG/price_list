@@ -41,18 +41,21 @@ async function searchProduct() {
 
 
     let result = await response.json();
+    console.log(result);
 
     let str = "";
     for(let i = 0; i < result.length; i++) {
         let obj = result[i];
         str += `<tr>
+        <th>${obj["id"]}</th>
         <th>${obj["name"]}</th>
-        <th>${obj["categoryid"]}</th>
+        <th>${obj["category"]["name"]}</th>
         <th>${obj["price"]}</th>
         </tr>`;
     }
     productsTable.innerHTML = `<thead>
             <tr>
+                <th>ID товара</th>
                 <th>Название товара</th>
                 <th>Категория товара</th>
                 <th>Цена товара</th>
