@@ -1,4 +1,6 @@
+const select = document.querySelector('#ProductCategory');
 const select1 = document.querySelector('#ProductCategory1');
+const select2 = document.querySelector('#ProductCategory2');
 
 
 async function loadCategories() {
@@ -12,7 +14,11 @@ async function loadCategories() {
             let select0 = document.createElement('option');
             select0.innerText = obj["name"];
             select0.setAttribute("value", obj["id"]);
+            let select01 = select0.cloneNode(true);
+            let select02 = select0.cloneNode(true);
             select1.appendChild(select0);
+            select.appendChild(select01);
+            select2.appendChild(select02);
         }
     } else {
         alert("Ошибка HTTP: " + response.status);

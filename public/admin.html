@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Прайс-лист</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body>
+	<nav class="navbar bg-body-tertiary">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/">
+				Прайс-лист фирмы
+			</a>
+			<a href="/admin">Админ-панель</a>
+			<a href="/login">Войти</a>
+			<a href="/logout">Выйти</a>
+		</div>
+	</nav>
+	<div class="container">
+		<h1>Добавить новую категорию</h1>
+		<form action="/addCategory" method="post">
+			<div class="mb-3">
+				<label for="category" class="form-label">Введите название новой категории:</label>
+				<input type="text" name="category" class="form-control" id="category">
+			</div>
+			<button type="submit" class="btn btn-primary">Добавить категорию</button>
+		</form>
+		<br>
+		<hr><br>
+	</div>
+	<div class="container">
+		<h1>Добавить новый товар</h1>
+		<form action="/addProduct" method="post">
+			<div class="mb-3">
+				<label for="productName" class="form-label">Введите название нового товара:</label>
+				<input type="text" name="productName" class="form-control" id="productName">
+			</div>
+			<div class="mb-3">
+				<label for="productPrice" class="form-label">Введите цену:</label>
+				<input type="number" name="productPrice" class="form-control" id="productPrice">
+			</div>
+			<select name="ProductCategory" class="form-select form-select-lg mb-3" id="ProductCategory">
+				<option value="" selected>Выберите категорию</option>
+			</select>
+			<button type="submit" class="btn btn-primary">Добавить товар</button>
+		</form>
+		<br>
+		<hr><br>
+	</div>
+	<div class="container">
+		<h1>Изменение категории у товара</h1>
+		<form action="/changeCategory" method="post">
+			<div class="mb-3">
+				<label for="productId" class="form-label">Введите ID товара</label>
+				<input type="text" name="productId" class="form-control" id="productId">
+			</div>
+			<select name="ProductCategory" class="form-select form-select-lg mb-3" id="ProductCategory2">
+				<option value="" selected>Выберите категорию</option>
+			</select>
+			<button type="submit" class="btn btn-primary">Изменить категорию товара</button>
+		</form>
+		<br>
+		<hr><br>
+	</div>
+	<div class="container">
+		<h1>Поиск товара по различным полям</h1>
+		<form action="#" onsubmit="searchProduct();return false" id="searchForm">
+			<div class="mb-3">
+				<label for="productName" class="form-label">Введите название товара:</label>
+				<input type="text" name="productName" class="form-control" id="productName1">
+			</div>
+			<select name="ProductCategory" class="form-select form-select-lg mb-3" id="ProductCategory1">
+				<option value="" selected>Выберите категорию</option>
+			</select>
+			<button type="submit" class="btn btn-primary">Найти товар</button>
+		</form>
+		<br>
+		<table id="productsTable" class="table">
+			<thead>
+				<tr>
+					<th>Название товара</th>
+					<th>Категория товара</th>
+					<th>Цена товара</th>
+				</tr>
+			</thead>
+		</table>
+		<br>
+		<hr><br>
+	</div>
+	<div class="container">
+		<h1>Добавление администратора</h1>
+		<form action="/addAdmin" method="post">
+			<div class="mb-3">
+				<label for="adminName" class="form-label">Введите имя:</label>
+				<input type="text" name="adminName" class="form-control" id="adminName">
+			</div>
+			<div class="mb-3">
+				<label for="adminLogin" class="form-label">Введите логин:</label>
+				<input type="text" name="adminLogin" class="form-control" id="adminLogin">
+			</div>
+			<div class="mb-3">
+				<label for="adminPassword" class="form-label">Введите пароль:</label>
+				<input type="password" name="adminPassword" class="form-control" id="adminPassword">
+			</div>
+			<button type="submit" class="btn btn-primary">Добавить администратора</button>
+		</form>
+		<br>
+		<hr><br>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+		crossorigin="anonymous"></script>
+	<script src="admin.js"></script>
+</body>
+
+</html>

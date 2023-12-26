@@ -15,53 +15,11 @@
             <a class="navbar-brand" href="/">
                 Прайс-лист фирмы
             </a>
-            <a href="#">Войти</a>
+            <a href="/admin">Админ-панель</a>
+            <a href="/login">Войти</a>
+            <a href="/logout">Выйти</a>
         </div>
     </nav>
-    <div class="container">
-        <h1>Добавить новую категорию</h1>
-        <form action="/addCategory" method="post">
-            <div class="mb-3">
-                <label for="category" class="form-label">Введите название новой категории:</label>
-                <input type="text" name="category" class="form-control" id="category">
-            </div>
-            <button type="submit" class="btn btn-primary">Добавить категорию</button>
-        </form>
-        <br><hr><br>
-    </div>
-    <div class="container">
-        <h1>Добавить новый товар</h1>
-        <form action="/addProduct" method="post">
-            <div class="mb-3">
-                <label for="productName" class="form-label">Введите название нового товара:</label>
-                <input type="text" name="productName" class="form-control" id="productName">
-            </div>
-            <div class="mb-3">
-                <label for="productPrice" class="form-label">Введите цену:</label>
-                <input type="number" name="productPrice" class="form-control" id="productPrice">
-            </div>
-            <select name="ProductCategory" class="form-select form-select-lg mb-3" id="ProductCategory">
-                <option value="" selected>Выберите категорию</option>
-            </select>
-            <button type="submit" class="btn btn-primary">Добавить товар</button>
-        </form>
-        <br><hr><br>
-    </div>
-    <div class="container">
-        <h1>Изменение категории у товара</h1>
-        <form action="/changeCategory" method="post">
-            <div class="mb-3">
-                <label for="productId" class="form-label">Введите ID товара</label>
-                <input type="text" name="productId" class="form-control" id="productId">
-            </div>
-            <select name="ProductCategory" class="form-select form-select-lg mb-3" id="ProductCategory2">
-                <option value="" selected>Выберите категорию</option>
-            </select>
-            <button type="submit" class="btn btn-primary">Изменить категорию товара</button>
-        </form>
-        <br>
-        <hr><br>
-    </div>
     <div class="container">
         <h1>Поиск товара по различным полям</h1>
         <form action="#" onsubmit="searchProduct();return false" id="searchForm">
@@ -84,25 +42,6 @@
             </tr> 
             </thead>
         </table>
-        <br><hr><br>
-    </div>
-    <div class="container">
-        <h1>Добавление администратора</h1>
-        <form action="#">
-            <div class="mb-3">
-                <label for="adminName" class="form-label">Введите имя:</label>
-                <input type="text" name="adminName" class="form-control" id="adminName">
-            </div>
-            <div class="mb-3">
-                <label for="adminLogin" class="form-label">Введите логин:</label>
-                <input type="text" name="adminLogin" class="form-control" id="adminLogin">
-            </div>
-            <div class="mb-3">
-                <label for="adminPassword" class="form-label">Введите пароль:</label>
-                <input type="password" name="adminPassword" class="form-control" id="adminPassword">
-            </div>
-            <button type="submit" class="btn btn-primary">Добавить администратора</button>
-        </form>
         <br><hr><br>
     </div>
     
